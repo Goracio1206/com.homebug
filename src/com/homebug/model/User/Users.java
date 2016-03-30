@@ -1,5 +1,7 @@
 package com.homebug.model.User;
 
+import com.homebug.model.DB.WriteToDB;
+
 import java.io.*;
 
 /**
@@ -35,27 +37,7 @@ public class Users {
         this.password = password;
         this.admin = admin;
 
-        File newUser = new File("E:\\HomeBug\\Users\\" + fName + ".txt" );
-        FileWriter fw = new FileWriter(newUser);
-        BufferedWriter writer = new BufferedWriter(fw);
-        try {
-            if (!newUser.exists()){
-                newUser.createNewFile();
-            } else {
-                writer.write("First Name: " + fName + "\n\r\n\r");
-                writer.write("Last Name: " + lName + "\n\r\n\r");
-                writer.write("Address Name: " + address + "\n\r\n\r");
-                writer.write("Password: " + password + "\n\r\n\r");
-                writer.write("Admin: " + admin + "\n\r\n\r");
-
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            writer.flush();
-            writer.close();
-        }
+        WriteToDB.writeToDB(fName,lName,address,phone,password,admin,this);
     }
 
     protected void makeAdmin() {
